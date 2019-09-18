@@ -2,7 +2,8 @@ const results = document.querySelector("#results");
 const resultsSubText = document.querySelector("#results-sub-text");
 
 const searchJobs = (keyword) => {
-  const apiUrl = `https://jobs.github.com/positions.json?description=${keyword}&full_time=true&page=1`;
+  let page = 1;
+  const apiUrl = `https://jobs.github.com/positions.json?description=${keyword}&page=${page}`;
   fetch(apiUrl)
     .then(response => response.json())
     .then((data) => {
@@ -21,7 +22,7 @@ const searchJobs = (keyword) => {
         <tr>
           <td><a href="${job.url}">${job.title}</a></td>
           <td>${job.company}</td>
-          <td>${job.type}</td>
+          <td style="white-space: nowrap;">${job.type}</td>
           <td>${job.location}</td>
         </tr>`;
         results.insertAdjacentHTML('beforeend', newJob);
